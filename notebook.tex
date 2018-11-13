@@ -1,0 +1,623 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Analisa Data Upaya Kesehatan per Provinsi 2000-2012}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Tugas Analisa Data - Upaya Kesehatan per Provinsi
+2000-2012}\label{tugas-analisa-data---upaya-kesehatan-per-provinsi-2000-2012}
+
+\subsection{Nama: Luthfi Zharif}\label{nama-luthfi-zharif}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{from} \PY{n+nn}{IPython}\PY{n+nn}{.}\PY{n+nn}{display} \PY{k}{import} \PY{n}{HTML}
+        \PY{n}{HTML}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}\PY{l+s+s1}{\PYZlt{}script\PYZgt{}}
+        \PY{l+s+s1}{code\PYZus{}show=true; }
+        \PY{l+s+s1}{function code\PYZus{}toggle() }\PY{l+s+s1}{\PYZob{}}
+        \PY{l+s+s1}{ if (code\PYZus{}show)}\PY{l+s+s1}{\PYZob{}}
+        \PY{l+s+s1}{ \PYZdl{}(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{div.input}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{).hide();}
+        \PY{l+s+s1}{ \PYZcb{} else }\PY{l+s+s1}{\PYZob{}}
+        \PY{l+s+s1}{ \PYZdl{}(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{div.input}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{).show();}
+        \PY{l+s+s1}{ \PYZcb{}}
+        \PY{l+s+s1}{ code\PYZus{}show = !code\PYZus{}show}
+        \PY{l+s+s1}{\PYZcb{} }
+        \PY{l+s+s1}{\PYZdl{}( document ).ready(code\PYZus{}toggle);}
+        \PY{l+s+s1}{\PYZlt{}/script\PYZgt{}}
+        \PY{l+s+s1}{The raw code for this IPython notebook is by default hidden for easier reading.}
+        \PY{l+s+s1}{To toggle on/off the raw code, click \PYZlt{}a href=}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{javascript:code\PYZus{}toggle()}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{\PYZgt{}here\PYZlt{}/a\PYZgt{}.}\PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}1}]:} <IPython.core.display.HTML object>
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{} Data Source: https://data.go.id/dataset/data\PYZhy{}upaya\PYZhy{}kesehatan\PYZhy{}per\PYZhy{}provinsi}
+        
+        \PY{c+c1}{\PYZsh{} Load the data first}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        
+        \PY{n}{data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{processed\PYZhy{}data\PYZhy{}upaya\PYZhy{}kesehatan\PYZhy{}per\PYZhy{}provinsi\PYZhy{}2000\PYZhy{}2012.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{delimiter}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{,}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{encoding}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{utf\PYZhy{}8}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{data}\PY{o}{.}\PY{n}{sample}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}1}]:}       kode\_provinsi              nama\_provinsi  \textbackslash{}
+        3013             52  Prov. Nusa Tenggara Barat   
+        2949             52  Prov. Nusa Tenggara Barat   
+        3707             63   Prov. Kalimantan Selatan   
+        3838             64     Prov. Kalimantan Timur   
+        1783             31          Prov. DKI Jakarta   
+        5542             94                Prov. Papua   
+        3010             52  Prov. Nusa Tenggara Barat   
+        1255             18              Prov. Lampung   
+        566              14                 Prov. Riau   
+        2464             35           Prov. Jawa Timur   
+        
+                   indikator\_upaya\_kesehatan  tahun  nilai  
+        3013                Persen Salinakes   2010  75.96  
+        2949           Persen Kunjungan Bayi   2011  78.50  
+        3707         Prevalensi BBLR per 100   2002  33.20  
+        3838  Persen Pemberian Fe3 Ibu Hamil   2003  56.12  
+        1783             Persen Kunjungan K4   2002  76.44  
+        5542                Persen Salinakes   2004  39.70  
+        3010                Persen Salinakes   2007  81.05  
+        1255           Persen Kunjungan Bayi   2007   0.00  
+        566          Persen Imunisasi Campak   2007  95.70  
+        2464             Persen Kunjungan K4   2007  82.74  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{} Check if she has a weakness (null values)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Amount of rows: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{data}\PY{o}{.}\PY{n}{nama\PYZus{}provinsi}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+        \PY{n}{data}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Amount of rows:  5577
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}2}]:} kode\_provinsi                 0
+        nama\_provinsi                 0
+        indikator\_upaya\_kesehatan     0
+        tahun                         0
+        nilai                        34
+        dtype: int64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{} Nobody is perfect. She has 34 unwanted traits, especially at \PYZsq{}nilai\PYZsq{} column.}
+        \PY{c+c1}{\PYZsh{} However, since her bad traits account for only 0.60\PYZpc{} of all traits, we can forgive her and ignore it by dropping it}
+        \PY{n}{data} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{dropna}\PY{p}{(}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Amount of rows after dropping the NaN: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{data}\PY{o}{.}\PY{n}{nilai}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Amount of rows after dropping the NaN:  5543
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{} Let\PYZsq{}s analyse her uniqueness}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Unique value in each column:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{nunique}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} We find from her bio that there is 33 province in Indonesia, 13 health indicator in her. How about we list them?}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Province in Indonesia:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{k}{for} \PY{n}{province} \PY{o+ow}{in} \PY{n}{data}\PY{o}{.}\PY{n}{nama\PYZus{}provinsi}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZhy{} }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{province}\PY{p}{)}
+            
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Health indicators:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{k}{for} \PY{n}{indicator} \PY{o+ow}{in} \PY{n}{data}\PY{o}{.}\PY{n}{indikator\PYZus{}upaya\PYZus{}kesehatan}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZhy{} }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{indicator}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Unique value in each column:
+kode\_provinsi                  33
+nama\_provinsi                  33
+indikator\_upaya\_kesehatan      13
+tahun                          13
+nilai                        2438
+dtype: int64
+Province in Indonesia:
+-  Prov. Nanggroe Aceh Darussalam
+-  Prov. Sumatera Utara
+-  Prov. Sumatera Barat
+-  Prov. Riau
+-  Prov. Jambi
+-  Prov. Sumatera Selatan
+-  Prov. Bengkulu
+-  Prov. Lampung
+-  Prov. Kepulauan Bangka Belitung
+-  Prov. Kepulauan Riau
+-  Prov. DKI Jakarta
+-  Prov. Jawa Barat
+-  Prov. Jawa Tengah
+-  Prov. D I Yogyakarta
+-  Prov. Jawa Timur
+-  Prov. Banten
+-  Prov. Bali
+-  Prov. Nusa Tenggara Barat
+-  Prov. Nusa Tenggara Timur
+-  Prov. Kalimantan Barat
+-  Prov. Kalimantan Tengah
+-  Prov. Kalimantan Selatan
+-  Prov. Kalimantan Timur
+-  Prov. Sulawesi Utara
+-  Prov. Sulawesi Tengah
+-  Prov. Sulawesi Selatan
+-  Prov. Sulawesi Tenggara
+-  Prov. Gorontalo
+-  Prov. Sulawesi Barat
+-  Prov. Maluku
+-  Prov. Maluku Utara
+-  Prov. Papua Barat
+-  Prov. Papua
+Health indicators:
+-  Jumlah Peserta JPK
+-  Persen Balita Gizi Buruk
+-  Persen Desa UCI
+-  Persen Drop out imunisasi
+-  Persen Imunisasi Campak
+-  Persen Kunjungan Bayi
+-  Persen Kunjungan K1
+-  Persen Kunjungan K4
+-  Persen Kunjungan Neonatus KN1
+-  Persen Pemberian Fe3 Ibu Hamil
+-  Persen Salinakes
+-  PersentasePeserta KB Baru
+-  Prevalensi BBLR per 100
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{} I\PYZsq{}m curious about the health indicator. Is she single or not?}
+        \PY{n}{data}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{indikator\PYZus{}upaya\PYZus{}kesehatan}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nilai}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}5}]:}                                 count          mean           std  min  \textbackslash{}
+        indikator\_upaya\_kesehatan                                                
+        Jumlah Peserta JPK              429.0  1.041622e+06  2.613364e+06  0.0   
+        Persen Balita Gizi Buruk        429.0  1.734942e+00  3.495699e+00  0.0   
+        Persen Desa UCI                 429.0  5.499928e+01  3.448297e+01  0.0   
+        Persen Drop out imunisasi       429.0  6.670000e+00  4.815873e+00 -1.5   
+        Persen Imunisasi Campak         428.0  8.350019e+01  2.164220e+01  0.0   
+        Persen Kunjungan Bayi           429.0  3.344385e+01  3.844810e+01  0.0   
+        Persen Kunjungan K1             429.0  7.770685e+01  3.210590e+01  0.0   
+        Persen Kunjungan K4             429.0  7.196009e+01  2.340462e+01  0.0   
+        Persen Kunjungan Neonatus KN1   396.0  6.989121e+01  2.873992e+01  0.0   
+        Persen Pemberian Fe3 Ibu Hamil  429.0  5.566350e+01  2.501526e+01  0.0   
+        Persen Salinakes                429.0  6.988737e+01  2.402323e+01  0.0   
+        PersentasePeserta KB Baru       429.0  6.907230e+04  1.730141e+05  0.0   
+        Prevalensi BBLR per 100         429.0  1.570140e+00  4.481267e+00  0.0   
+        
+                                            25\%      50\%        75\%          max  
+        indikator\_upaya\_kesehatan                                                 
+        Jumlah Peserta JPK               0.0000     0.00  950598.00  19352822.00  
+        Persen Balita Gizi Buruk         0.0000     0.00       0.79        21.66  
+        Persen Desa UCI                 23.1400    68.63      81.78       100.00  
+        Persen Drop out imunisasi        3.8900     5.90       8.70        30.25  
+        Persen Imunisasi Campak         81.6400    88.74      93.41       117.65  
+        Persen Kunjungan Bayi            0.0000     0.00      75.47       100.52  
+        Persen Kunjungan K1             82.0900    90.36      94.84       109.39  
+        Persen Kunjungan K4             70.0600    79.29      84.86        97.49  
+        Persen Kunjungan Neonatus KN1   67.8225    80.90      87.47       129.99  
+        Persen Pemberian Fe3 Ibu Hamil  41.1000    63.50      74.67        99.75  
+        Persen Salinakes                65.5500    75.68      84.89       115.08  
+        PersentasePeserta KB Baru       16.0500  2618.00   56860.00   1413644.00  
+        Prevalensi BBLR per 100          0.0000     0.00       0.00        33.20  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{} Well, it turns out that she has a unique personality ;)}
+        \PY{c+c1}{\PYZsh{} PersentasePeserta KB Baru looks quite strange though, as a percentage shouldn\PYZsq{}t value more than 100 (per cent)}
+        \PY{c+c1}{\PYZsh{} Now, let\PYZsq{}s compare each province by its health indicator}
+        \PY{c+c1}{\PYZsh{} In this notebook, I will compare the first five indicators only.}
+        
+        \PY{n}{dataGroupingSum} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{indikator\PYZus{}upaya\PYZus{}kesehatan}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nama\PYZus{}provinsi}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nilai}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+        \PY{n}{dataGrouping} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{indikator\PYZus{}upaya\PYZus{}kesehatan}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nama\PYZus{}provinsi}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nilai}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+        
+        \PY{n}{dataJPK} \PY{o}{=} \PY{n}{dataGroupingSum}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Jumlah Peserta JPK}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{dataBalitaGizi} \PY{o}{=} \PY{n}{dataGrouping}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Persen Balita Gizi Buruk}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{dataUCI} \PY{o}{=} \PY{n}{dataGrouping}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Persen Desa UCI}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{dataDropoutImunisasi} \PY{o}{=} \PY{n}{dataGrouping}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Persen Drop out imunisasi}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{dataImunisasiCampak} \PY{o}{=} \PY{n}{dataGrouping}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Persen Imunisasi Campak}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} dataKBayi = dataGrouping[\PYZsq{}Persen Kunjungan Bayi\PYZsq{}]}
+        \PY{c+c1}{\PYZsh{} dataK1 = dataGrouping[\PYZsq{}Persen Kunjungan K1\PYZsq{}]}
+        \PY{c+c1}{\PYZsh{} dataK4 = dataGrouping[\PYZsq{}Persen Kunjungan K4\PYZsq{}]}
+        \PY{c+c1}{\PYZsh{} dataKN1 = dataGrouping[\PYZsq{}Persen Kunjungan Neonatus KN1\PYZsq{}]}
+        \PY{c+c1}{\PYZsh{} dataFe3 = dataGrouping[\PYZsq{}Persen Pemberian Fe3 Ibu Hamil\PYZsq{}]}
+        \PY{c+c1}{\PYZsh{} dataSalinakes = dataGrouping[\PYZsq{}Persen Salinakes\PYZsq{}]}
+        \PY{c+c1}{\PYZsh{} dataKbBaru = dataGrouping[\PYZsq{}PersentasePeserta KB Baru\PYZsq{}]}
+        \PY{c+c1}{\PYZsh{} dataBBLR = dataGrouping[\PYZsq{}Prevalensi BBLR per 100\PYZsq{}]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c+c1}{\PYZsh{} Let\PYZsq{}s compare \PYZsq{}Jumlah Peserta JPK\PYZsq{}}
+        \PY{c+c1}{\PYZsh{} Looks like JPK user mainly comes from Prov. Jawa Tengah}
+        \PY{n}{graph1} \PY{o}{=} \PY{n}{dataJPK}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{title} \PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{JPK User}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{legend}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{12}\PY{p}{)}
+        \PY{n}{graph1}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Province}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{12}\PY{p}{)}
+        \PY{n}{graph1}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Sum}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{12}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:} Text(0,0.5,'Sum')
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{} How about \PYZsq{}Persen Balita Gizi Buruk\PYZsq{}?}
+        \PY{c+c1}{\PYZsh{} It seems malnourished toddlers percentage is not quite big, with largest mean happen in Prov. Gorontalo for approximately 4\PYZpc{}}
+        \PY{n}{graph2} \PY{o}{=} \PY{n}{dataBalitaGizi}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{title} \PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Malnourished Toddlers}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{legend}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{12}\PY{p}{)}
+        \PY{n}{graph2}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Province}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{12}\PY{p}{)}
+        \PY{n}{graph2}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Average (}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{12}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:} Text(0,0.5,'Average (\%)')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{} Now, let\PYZsq{}s analyse \PYZsq{}Persen Desa UCI\PYZsq{}!}
+        \PY{c+c1}{\PYZsh{} UCI or Universal Child Immunization seems to become norm although not perfect}
+        \PY{c+c1}{\PYZsh{} Three lowest UCI rate occured in Prov. Papua Barat, Sulawesi Barat, and Maluku Utara}
+        \PY{n}{graph3} \PY{o}{=} \PY{n}{dataUCI}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{title} \PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{UCI Village Percentage}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{legend}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{12}\PY{p}{)}
+        \PY{n}{graph3}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Province}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{12}\PY{p}{)}
+        \PY{n}{graph3}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Average (}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{12}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}9}]:} Text(0,0.5,'Average (\%)')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_10_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{} Now, let\PYZsq{}s analyze \PYZsq{}Persen Drop out imunisasi\PYZsq{}!}
+         \PY{c+c1}{\PYZsh{} Three highest Immunization Dropout rate occured in Prov. NAD, Papua, and Sumatera Barat}
+         \PY{n}{graph4} \PY{o}{=} \PY{n}{dataDropoutImunisasi}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{title} \PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Immunization Dropout Rate}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{legend}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{12}\PY{p}{)}
+         \PY{n}{graph4}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Province}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{12}\PY{p}{)}
+         \PY{n}{graph4}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Average (}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{12}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}10}]:} Text(0,0.5,'Average (\%)')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_11_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{c+c1}{\PYZsh{} Now, let\PYZsq{}s analyze \PYZsq{}Persen Imunisasi Campak\PYZsq{}!}
+         \PY{c+c1}{\PYZsh{} Compared to UCI, Measles immunisation rate is higher and resembles an early success}
+         \PY{c+c1}{\PYZsh{} However, Prov. Papua Barat and Sulawesi Barat still in lowest rate.}
+         \PY{c+c1}{\PYZsh{} One funny note: Jakarta has average percentage more than 100 \PYZpc{}.}
+         \PY{n}{graph5} \PY{o}{=} \PY{n}{dataImunisasiCampak}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{title} \PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Measles Immunization Rate}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{legend}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{12}\PY{p}{)}
+         \PY{n}{graph5}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Province}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{12}\PY{p}{)}
+         \PY{n}{graph5}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Average (}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{12}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}11}]:} Text(0,0.5,'Average (\%)')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_12_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Conclusion}\label{conclusion}
+
+Based on the data, it seems that health indicator rate still low,
+especially in some remote province, e.g. Papua Barat, Maluku Utara, and
+Sulawesi Barat.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
